@@ -14,13 +14,13 @@ import (
 
 func main() {
 	var (
-		org = flag.String("org", "", "github organization name")
-		//query      = flag.String("query", "", "search query")
+		org   = flag.String("org", "", "github organization name")
+		query = flag.String("query", "", "search query")
 		// TODO: use cobra to defines sub commands, search and list need different default size.
 		// search need size=10
 		// list need size=100 (limit from v4 API)
-		size       = flag.Int("size", 100, "number of items to return")
-		apiVersion = flag.String("api", "v4", "github API version")
+		size       = flag.Int("size", 10, "number of items to return")
+		apiVersion = flag.String("api", "v3", "github API version")
 	)
 	flag.Parse()
 
@@ -38,8 +38,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	//results, err := client.Search(ctx, *query, *org, *size)
-	results, err := client.List(ctx, *org, *size)
+	results, err := client.Search(ctx, *query, *org, *size)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)

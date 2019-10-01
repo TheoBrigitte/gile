@@ -15,6 +15,7 @@ func (c Client) Search(ctx context.Context, query, org string, size int) ([]stri
 	}
 
 	options := &github.SearchOptions{
+		Sort: "updated",
 		ListOptions: github.ListOptions{
 			PerPage: size,
 		},
